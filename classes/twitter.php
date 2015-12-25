@@ -187,9 +187,9 @@ class Twitter
 	 * @param  string $fmt
 	 * @return array
 	 */
-	public function post($uri, array $params = array(), $fmt = 'json')
+	public function post($uri, array $params = array(), $fmt = 'json', $media = false)
 	{
-		return $this->call('POST', $uri, $params, $fmt);
+		return $this->call('POST', $uri, $params, $fmt, $media);
 	}
 
 	/**
@@ -243,9 +243,13 @@ class Twitter
 	 * @return array
 	 * @throws \FuelException
 	 */
-	protected function call($method, $uri, $params, $fmt)
+	protected function call($method, $uri, $params, $fmt, $media)
 	{
-		$code = $this->tmhoauth->request($method, $this->tmhoauth->url($uri, $fmt), $params);
+		if($media == true){
+			$code = $this->tmhoauth->request($method, $this->tmhoauth->url($uri, $fmt), $params, true, true);
+		} else {
+			$code = $this->tmhoauth->request($method, $this->tmhoauth->url($uri, $fmt), $params);
+		}
 
 		if ($code != 200)
 		{

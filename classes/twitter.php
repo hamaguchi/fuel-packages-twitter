@@ -176,7 +176,7 @@ class Twitter
 	 */
 	public function get($uri, array $params = array(), $fmt = 'json')
 	{
-		return $this->call('GET', $uri, $params, $fmt);
+		return $this->call('GET', $uri, $params, $fmt, false);
 	}
 
 	/**
@@ -202,7 +202,7 @@ class Twitter
 	 */
 	public function put($uri, array $params = array(), $fmt = 'json')
 	{
-		return $this->call('PUT', $uri, $params, $fmt);
+		return $this->call('PUT', $uri, $params, $fmt, false);
 	}
 
 	/**
@@ -215,7 +215,7 @@ class Twitter
 	 */
 	public function delete($uri, array $params = array(), $fmt = 'json')
 	{
-		return $this->call('DELETE', $uri, $params, $fmt);
+		return $this->call('DELETE', $uri, $params, $fmt, false);
 	}
 
 	/*******************************************************
@@ -243,7 +243,7 @@ class Twitter
 	 * @return array
 	 * @throws \FuelException
 	 */
-	protected function call($method, $uri, $params, $fmt, $media)
+	protected function call($method, $uri, $params, $fmt, $media = false)
 	{
 		if($media == true){
 			$code = $this->tmhoauth->request($method, $this->tmhoauth->url($uri, $fmt), $params, true, true);
